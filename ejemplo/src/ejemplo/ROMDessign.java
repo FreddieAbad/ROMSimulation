@@ -19,23 +19,21 @@ import java.util.logging.Logger;
  */
 public class ROMDessign extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
+    String[][] matrizSt = new String[30][16];
+
     public ROMDessign() {
         initComponents();
-        Memory mem=new Memory();
-        try{
-            String [][] matriz=mem.loadFile();
-        }catch(URISyntaxException u){
+        Memory mem = new Memory();
+        try {
+            matrizSt = mem.loadFile();
+        } catch (URISyntaxException u) {
             System.out.println(u);
-        }catch(FileNotFoundException f){
+        } catch (FileNotFoundException f) {
             System.out.println(f);
-        }catch(IOException i){
+        } catch (IOException i) {
             System.out.println(i);
         }
-        
-        
+
     }
 
     /**
@@ -69,7 +67,6 @@ public class ROMDessign extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -79,6 +76,7 @@ public class ROMDessign extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
         pin2 = new javax.swing.JPanel();
         pin2lbl = new javax.swing.JLabel();
         pin3 = new javax.swing.JPanel();
@@ -101,6 +99,7 @@ public class ROMDessign extends javax.swing.JFrame {
         pin_ce_lbl = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         loadFile = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
         pnlDer = new javax.swing.JPanel();
         jSeparator29 = new javax.swing.JSeparator();
         jSeparator55 = new javax.swing.JSeparator();
@@ -316,10 +315,6 @@ public class ROMDessign extends javax.swing.JFrame {
         jLabel22.setText("D0");
         micro.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
-        jLabel23.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jLabel23.setText("D4");
-        micro.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
-
         jLabel24.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jLabel24.setText("D5");
         micro.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
@@ -380,6 +375,10 @@ public class ROMDessign extends javax.swing.JFrame {
         );
 
         micro.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, 50));
+
+        jLabel58.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel58.setText("D4");
+        micro.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
         getContentPane().add(micro, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 25, 310, 640));
 
@@ -716,13 +715,17 @@ public class ROMDessign extends javax.swing.JFrame {
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loadFile.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        loadFile.setText("Cargar Archivo");
+        loadFile.setText("Refrescar Archivo");
         loadFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadFileActionPerformed(evt);
             }
         });
-        jPanel14.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 120, 60));
+        jPanel14.add(loadFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
+
+        jLabel36.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel36.setText("D5");
+        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
 
         getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 140, 680));
 
@@ -911,7 +914,7 @@ public class ROMDessign extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 51, 0));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pnlIzq.add(jSeparator1);
-        jSeparator1.setBounds(0, 30, 150, 10);
+        jSeparator1.setBounds(0, 30, 150, 2);
 
         jSeparator2.setForeground(new java.awt.Color(0, 51, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -1707,9 +1710,8 @@ public class ROMDessign extends javax.swing.JFrame {
 
     private void loadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileActionPerformed
         Memory prog = new Memory();
-        // Programa programa= new Programa();
         try {
-            String[][] matriz = prog.loadFile();
+            matrizSt = prog.loadFile();
 
         } catch (URISyntaxException o) {
             System.out.println("Error");
@@ -1743,7 +1745,7 @@ public class ROMDessign extends javax.swing.JFrame {
             pnl22.setBackground(Color.red);
         } else {
             pin2lbl.setText("0");
-            pin2.setBackground(Color.BLUE);      
+            pin2.setBackground(Color.BLUE);
             pnl21.setBackground(Color.BLUE);
             pnl22.setBackground(Color.BLUE);
         }
@@ -1834,12 +1836,92 @@ public class ROMDessign extends javax.swing.JFrame {
     }//GEN-LAST:event_pin6MouseClicked
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        String posicion = pin1lbl.getText()+""+pin2lbl.getText()+""+pin3lbl.getText()+""+pin4lbl.getText()+""+pin5lbl.getText()+""+pin6lbl.getText()+""+pin7lbl.getText()+""+pin8lbl.getText();
-        int pos=Integer.parseInt(posicion,2);  
-        /*for (int i = 0; i < matriz.length; i++) {
-            
-        }*/
-        System.out.println(posicion+"-"+pos);
+        pnlSal11.setBackground(Color.blue);
+        pnlSal12.setBackground(Color.blue);
+        pnlSal13.setBackground(Color.blue);
+        pnlSal14.setBackground(Color.blue);
+        pnlSal15.setBackground(Color.blue);
+        pnlSal16.setBackground(Color.blue);
+        pnlSal17.setBackground(Color.blue);
+        pnlSal18.setBackground(Color.blue);
+
+        String posicion = pin1lbl.getText() + "" + pin2lbl.getText() + "" + pin3lbl.getText() + "" + pin4lbl.getText() + "" + pin5lbl.getText() + "" + pin6lbl.getText() + "" + pin7lbl.getText() + "" + pin8lbl.getText();
+        int pos = Integer.parseInt(posicion, 2);
+        int count = 0;
+        for (int i = 0; i < matrizSt.length; i++) {
+            for (int j = 0; j < matrizSt[i].length; j++) {
+                if (count == pos) {
+                    String aux = matrizSt[i][j];
+                    int entero = Integer.parseInt(aux, 16);
+                    String binario = Integer.toBinaryString(entero);
+                   
+
+                    if (binario.length() == 7) {
+                        binario = "0" + binario;
+                        System.out.println(binario + "##");
+                        String[] binarioArray = binario.split("(?!^)");
+                        if (binarioArray[0].equals("1")) {
+                            pnlSal11.setBackground(Color.red);
+                            System.out.println("true");
+                        } else {
+                            pnlSal11.setBackground(Color.blue);
+                            System.out.println("false");
+                        }
+                        if (binarioArray[1].equals("1")) {
+                            pnlSal12.setBackground(Color.red);
+                            System.out.println("true");
+
+                        } else {
+                            pnlSal12.setBackground(Color.blue);
+                            System.out.println("false");
+
+                        }
+                        if (binarioArray[2].equals("1")) {
+                            pnlSal13.setBackground(Color.red);
+                        } else {
+                            pnlSal13.setBackground(Color.blue);
+                        }
+                        if (binarioArray[3].equals("1")) {
+                            pnlSal14.setBackground(Color.red);
+                        } else {
+                            pnlSal14.setBackground(Color.blue);
+                        }
+                        if (binarioArray[4].equals("1")) {
+                            pnlSal15.setBackground(Color.red);
+                        } else {
+                            pnlSal15.setBackground(Color.blue);
+                        }
+                        if (binarioArray[5].equals("1")) {
+                            pnlSal16.setBackground(Color.red);
+                        } else {
+                            pnlSal16.setBackground(Color.blue);
+                        }
+                        if (binarioArray[6].equals("1")) {
+                            pnlSal17.setBackground(Color.red);
+                        } else {
+                            pnlSal17.setBackground(Color.blue);
+                        }
+                        if (binarioArray[7].equals("1")) {
+                            pnlSal18.setBackground(Color.red);
+                        } else {
+                            pnlSal18.setBackground(Color.blue);
+                        }
+                    }
+                    break;
+                } else {
+                    count = count + 1;
+                   
+                    pnlSal11.setBackground(Color.red);
+                    pnlSal12.setBackground(Color.red);
+                    pnlSal13.setBackground(Color.red);
+                    pnlSal14.setBackground(Color.red);
+                    pnlSal15.setBackground(Color.red);
+                    pnlSal16.setBackground(Color.red);
+                    pnlSal17.setBackground(Color.red);
+                    pnlSal18.setBackground(Color.red);
+                }
+            }
+        }
     }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
@@ -1893,7 +1975,6 @@ public class ROMDessign extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1907,6 +1988,7 @@ public class ROMDessign extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -1930,6 +2012,7 @@ public class ROMDessign extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
